@@ -39,7 +39,7 @@ class Bot extends Command
      */
     public function handle()
     {
-        $token = "1368097021:AAFklljs39sDUNAHx0vGSrR0vIZzA6QTXPI";
+        $token = "";
 
         Artisan::call('migrate:fresh --seed');
 
