@@ -39,7 +39,7 @@ class Bot extends Command
      */
     public function handle()
     {
-        $token = "";
+        $token = "1368097021:AAFklljs39sDUNAHx0vGSrR0vIZzA6QTXPI";
 
         Artisan::call('migrate:fresh --seed');
 
@@ -54,10 +54,13 @@ class Bot extends Command
 
                 if(ctype_digit($message['message']['text'])){
                     $order = Order::where('id', (int)$message['message']['text'])->get()->first();
+                    if($order !== null){
+                        $status = $order->status?'Ваш заказ доставлен!':'Заказ доставляется';
 
-                    $status = $order->status?'Ваш заказ доставлен!':'Заказ доставляется';
-
-                    $text = 'Заказ: '.$order->title.' - '.'Статус заказа: '.$status;
+                        $text = 'Заказ: '.$order->title.' - '.'Статус заказа: '.$status;
+                    }else{
+                        $text = 'Такого заказа не существует';
+                    }
                 }else{
                     $text = "Неверный формат";
                 }
